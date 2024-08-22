@@ -6,6 +6,7 @@ const posts = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do ei",
     date: "276761",
     user: "Sandra B",
+    
   },
   {
     id: "6bd38af3-8a95-4a7a-add7-fd69c6b8f124",
@@ -14,6 +15,7 @@ const posts = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     date: "911166",
     user: "Sandra B",
+
   },
   {
     id: "836b0611-e82e-4b5e-8ab9-8e9f98e43549",
@@ -80,6 +82,31 @@ const posts = [
   }
 ];
 
+const post_images=[
+  {
+    id: "a5e08164-b12b-4e72-9191-2f7daadb4e88",
+    image_url: "https://example.com/image1.jpg",
+    post_id:"112"
+  },
+  {
+    id: "6bd38af3-8a95-4a7a-add7-fd69c6b8f124",
+    image_url: "https://example.com/image2.jpg",
+    post_id:"1234"
+  },
+  {
+    id: "836b0611-e82e-4b5e-8ab9-8e9f98e43549",
+    image_url: "https://example.com/image3.jpg",
+    post_id:"12346"
+  },
+  {
+    id: 'another-uuid',
+    image_url: 'http://example.com/image.jpg',
+    post_id: '888',
+  },
+ 
+]
+
 module.exports = {
   posts,
+  post_images,
 };

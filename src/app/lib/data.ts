@@ -23,7 +23,7 @@ export async function getPosts(){
     noStore();
     await new Promise((resolve) =>setTimeout(resolve, 3000));
     const data = await sql `SELECT * FROM posts `
-    console.log(data.rows)
+    // console.log(data.rows)
     return data.rows
   }catch(error){
 console.log("error fetchong the data",error)

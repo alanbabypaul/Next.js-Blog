@@ -1,9 +1,10 @@
 const { db } = require("@vercel/postgres");
-const { posts } = require("../src/app/lib/placeholder-data.js");
+const { posts ,images} = require("../src/app/lib/placeholder-data.js");
 
 async function seedPosts(client) {
   try {
     await client.sql`CREATE EXTENSION IF NOT EXISTS "uuid-ossp"`;
+
     // Create the "users" table if it doesn't exist
     const createTable = await client.sql`
       CREATE TABLE IF NOT EXISTS posts (
@@ -16,7 +17,17 @@ async function seedPosts(client) {
     `;
 
     console.log(`Created "posts" table`);
-
+    // create another table for post_images
+    const createImageTable = await client.sql`
+    CREATE TABLE IF NOT EXISTS post_images (
+      id UUID DEFAULT uuid_generate_v1mc() PRIMARY KEY,
+      author VARCHAR(255) NOT NULL,
+      title VARCHAR(255) NOT NULL UNIQUE,
+      image_url TEXT NOT NULL,
+      post_id UUID REFERENCES posts(id) ON DELETE CASCADE,
+      
+    );
+  `;
     // Insert data into the "users" table
     const insertedPosts = await Promise.all(
       posts.map(async (post) => {
@@ -28,10 +39,22 @@ async function seedPosts(client) {
       })
     );
     console.log(`Seeded ${insertedPosts.length} posts articles`);
+     // Insert data into the "users" table
+     const insertedImage = await Promise.all(
+      post_images.map(async (post) => {
+        return client.sql`
+        INSERT INTO post_images (id,author, title, image_url, post_id)
+        VALUES (${post_images.id}, ${post_images.author}, ${post_images.image_url}, ${post_images.post_id},)
+        ON CONFLICT (id) DO NOTHING;
+      `;
+      })
+    );
+    console.log(`Seeded ${insertedImage.length} post_images articles`);
 
     return {
       createTable,
       posts: insertedPosts,
+      post_images: insertedImage,
     };
   } catch (error) {
     console.error("Error seeding posts:", error);
