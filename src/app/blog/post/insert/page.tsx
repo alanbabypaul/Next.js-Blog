@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { User } from "@/app/lib/definition";
 import { getSession } from "next-auth/react";
 import { title } from "process";
-import Groq from "groq-sdk"; // Import Groq SDK
+import Groq from "groq-sdk"; 
 
 export default function Page() {
   const router = useRouter();
@@ -283,7 +283,7 @@ export default function Page() {
           <button
             type="submit"
             className={`bg-blue-400 text-white px-4 py-2 rounded-md bg-purple-600 hover:bg-purple-700 ${buttonClasses}`} 
-            disabled={!isFormValid()} 
+            // disabled={!isFormValid()} 
           >
             Submit
           </button>
